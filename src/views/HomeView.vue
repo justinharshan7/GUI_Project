@@ -30,14 +30,32 @@
       </div>
     </div>
 
-    <!-- Products Grid -->
-    <div v-else-if="filteredProducts.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-      <ProductCard
-        v-for="product in filteredProducts"
-        :key="product.id"
-        :product="product"
-        @click="goToProduct(product.id)"
-      />
+    <!-- Products Count & Sort -->
+    <div v-else-if="filteredProducts.length > 0">
+      <div class="flex items-center justify-between mb-4">
+        <p class="text-gray-500 dark:text-gray-400 text-sm">
+          Showing <span class="font-semibold text-indigo-600 dark:text-indigo-400">{{ filteredProducts.length }}</span> products
+        </p>
+        <select
+          v-model="sortBy"
+          class="px-4 py-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        >
+          <option value="">Default</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+          <option value="rating">Top Rated</option>
+        </select>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <ProductCard
+          v-for="product in filteredProducts"
+          :key="product.id"
+          :product="product"
+          @click="goToProduct(product.id)"
+        />
+      </div>
     </div>
 
     <!-- Empty State -->
@@ -62,14 +80,21 @@ const categories = ref<Category[]>([])
 const loading = ref(true)
 const searchQuery = ref('')
 const selectedCategory = ref('')
+const sortBy = ref('')
 const total = ref(0)
 
 const filteredProducts = computed(() => {
-  return products.value.filter(product => {
+  let result = products.value.filter(product => {
     const matchesSearch = product.title.toLowerCase().includes(searchQuery.value.toLowerCase())
     const matchesCategory = selectedCategory.value === '' || product.category === selectedCategory.value
     return matchesSearch && matchesCategory
   })
+
+  if (sortBy.value === 'price-asc') result = [...result].sort((a, b) => a.price - b.price)
+  if (sortBy.value === 'price-desc') result = [...result].sort((a, b) => b.price - a.price)
+  if (sortBy.value === 'rating') result = [...result].sort((a, b) => b.rating - a.rating)
+
+  return result
 })
 
 const fetchProducts = async () => {

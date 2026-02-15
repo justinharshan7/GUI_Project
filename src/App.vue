@@ -5,12 +5,14 @@
       <RouterView />
     </main>
     <Footer />
+    <BackToTop />
   </div>
 </template>
 
 <script setup lang="ts">
 import NavBar from './components/NavBar.vue'
 import Footer from './components/Footer.vue'
+import BackToTop from './components/BackToTop.vue'
 import { useDarkMode } from './composables/useDarkMode'
 
 const { isDark, toggleDarkMode } = useDarkMode()
