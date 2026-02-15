@@ -1,0 +1,29 @@
+Aim 01: Set up a Vue 3 + TypeScript + Tailwind CSS + Vue Router project using Vite
+Actual prompt: How do I create a new Vite project with Vue 3 and TypeScript template?
+
+Aim 02: Define strict TypeScript interfaces for DummyJSON API responses
+Actual prompt: Create TypeScript interfaces for a product object from DummyJSON API including id, title, description, price, discountPercentage, rating, stock, brand, category, thumbnail and images fields
+
+Aim 03: Create a reusable ProductCard component with Tailwind CSS
+Actual prompt: Create a Vue 3 ProductCard component using Tailwind CSS with product image, title, category, rating, price and discount badge
+
+Aim 04: Implement product listing with search and category filter
+Actual prompt: How do I implement search filtering and category filtering using Vue 3 computed properties?
+
+Aim 05: Create a responsive product grid layout using Tailwind CSS
+Actual prompt: Create a responsive grid layout using Tailwind CSS that shows 1 column on mobile, 2 on tablet and 4 on desktop
+
+Aim 06: Implement Vue Router for dynamic product detail pages
+Actual prompt: How do I set up Vue Router 4 with dynamic routes like /product/:id in Vue 3?
+
+Aim 07: Implement dark mode using Tailwind CSS class strategy
+Actual prompt: How do I implement dark mode toggle in Vue 3 using Tailwind CSS darkMode class strategy and localStorage?
+
+Aim 08: Create loading skeleton animations for better UX
+Actual prompt: Create a loading skeleton animation using Tailwind CSS animate-pulse for product cards
+
+Aim 09: Add sort functionality for products by price and rating
+Actual prompt: How do I sort an array of products by price ascending, price descending and rating using Vue 3 computed properties?
+
+Aim 10: Create a Back to Top button component with smooth scroll
+Actual prompt: Create a Vue 3 BackToTop component that appears after scrolling 300px and smoothly scrolls back to top
