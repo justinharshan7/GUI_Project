@@ -39,7 +39,7 @@
 
     <!-- Category Sections -->
     <div v-else>
-      <div v-for="category in categoriesWithProducts" :key="category.slug" class="mb-6 bg-emerald-50/50 dark:bg-[#012230] rounded-2xl border border-emerald-100 dark:border-emerald-900/40 p-4 shadow-md shadow-emerald-100 dark:shadow-emerald-900/30">
+     <div v-for="category in categoriesWithProducts" :key="category.slug" class="mb-6 bg-emerald-50/50 dark:bg-white/5 rounded-2xl border border-emerald-100 dark:border-white/10 p-4 shadow-md shadow-emerald-100 dark:shadow-black/30 dark:backdrop-blur-md">
 
         <!-- Category Header -->
         <div class="flex items-center justify-between mb-3">
@@ -75,7 +75,7 @@
               v-for="product in getProductsByCategory(category.slug)"
               :key="product.id"
               @click="goToProduct(product.id)"
-              class="flex-shrink-0 w-44 bg-white dark:bg-[#021018] rounded-xl border border-gray-200 dark:border-emerald-900/30 overflow-hidden cursor-pointer hover:shadow-lg hover:border-emerald-400 dark:hover:border-emerald-500 transition-all duration-200 group"
+             class="flex-shrink-0 w-44 bg-white dark:bg-white/[0.04] dark:backdrop-blur-sm rounded-xl border border-gray-200 dark:border-white/10 overflow-hidden cursor-pointer hover:shadow-lg hover:border-emerald-400 dark:hover:border-emerald-400/50 dark:hover:bg-white/[0.07] transition-all duration-200 group"
             >
               <!-- Image -->
               <div class="relative h-44 bg-gray-50 dark:bg-[#031520] overflow-hidden">

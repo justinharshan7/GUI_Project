@@ -34,7 +34,7 @@
 <div class="relative w-full md:w-52" ref="dropdownRef">
   <button
     @click="showDropdown = !showDropdown"
-    class="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-emerald-900/50 bg-white dark:bg-[#021018] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 flex items-center justify-between transition-all"
+    class="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-emerald-900/50 bg-white dark:bg-[#001718] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 flex items-center justify-between transition-all"
   >
     <span class="text-sm">{{ selectedCategory ? formatCategory(selectedCategory) : 'All Categories' }}</span>
     <span class="text-emerald-500 transition-transform duration-200" :class="showDropdown ? 'rotate-180' : ''">▾</span>
