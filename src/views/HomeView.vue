@@ -1,15 +1,20 @@
 <template>
   <div>
     <!-- Hero Section -->
-    <div class="bg-gradient-to-r from-indigo-600 to-violet-600 rounded-3xl p-8 mb-8 text-white">
-      <h1 class="text-4xl font-bold mb-2">Welcome to ShopVue 🛍️</h1>
-      <p class="text-indigo-100 text-lg">Discover amazing products at unbeatable prices</p>
+    <div class="relative bg-gradient-to-r from-emerald-600 to-teal-500 dark:from-gray-900 dark:to-gray-900 rounded-3xl p-8 mb-8 text-white overflow-hidden border border-transparent dark:border-emerald-500/30 dark:shadow-lg dark:shadow-emerald-500/10">
+  <!-- Glassmorphism glow effect for dark mode -->
+  <div class="absolute inset-0 dark:bg-gradient-to-r dark:from-emerald-600/10 dark:to-teal-500/10 rounded-3xl"></div>
+  <div class="absolute -top-10 -right-10 w-40 h-40 dark:bg-emerald-500/20 rounded-full blur-3xl"></div>
+  <div class="absolute -bottom-10 -left-10 w-40 h-40 dark:bg-teal-400/20 rounded-full blur-3xl"></div>
+  <div class="relative z-10">
+      <h1 class="text-4xl font-bold mb-2">Welcome to Glitch <span class="inline-block font-black text-teal-300 animate-pulse">⚡</span></h1>
+      <p class="text-emerald-100 text-lg">Next-gen shopping. Discover products that hit different.</p>
       <div class="mt-4 flex gap-4 text-sm">
         <span class="bg-white/20 px-3 py-1 rounded-full">{{ total }} Products</span>
         <span class="bg-white/20 px-3 py-1 rounded-full">{{ categories.length }} Categories</span>
       </div>
     </div>
-
+    </div>
     <!-- Filter Bar -->
     <FilterBar
       :categories="categories"
@@ -34,11 +39,11 @@
     <div v-else-if="filteredProducts.length > 0">
       <div class="flex items-center justify-between mb-4">
         <p class="text-gray-500 dark:text-gray-400 text-sm">
-          Showing <span class="font-semibold text-indigo-600 dark:text-indigo-400">{{ filteredProducts.length }}</span> products
+          Showing <span class="font-semibold text-emerald-600 dark:text-emerald-400">{{ filteredProducts.length }}</span> products
         </p>
         <select
           v-model="sortBy"
-          class="px-4 py-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          class="px-4 py-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
         >
           <option value="">Default</option>
           <option value="price-asc">Price: Low to High</option>

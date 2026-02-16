@@ -3,7 +3,7 @@
     <!-- Back Button -->
     <button
       @click="router.back()"
-      class="flex items-center gap-2 text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 mb-6 transition-colors"
+      class="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 hover:text-indigo-800 dark:hover:text-indigo-300 mb-6 transition-colors"
     >
       ← Back to Products
     </button>
@@ -37,7 +37,7 @@
 
         <!-- Info Section -->
         <div class="p-8">
-          <p class="text-indigo-500 dark:text-indigo-400 uppercase text-sm font-semibold tracking-wide mb-2">
+          <p class="text-emerald-500 dark:text-emerald-400 uppercase text-sm font-semibold tracking-wide mb-2">
             {{ product.category }}
           </p>
           <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">
@@ -62,19 +62,25 @@
 
           <!-- Price -->
           <div class="flex items-center gap-3 mb-6">
-            <span class="text-4xl font-bold text-indigo-600 dark:text-indigo-400">${{ product.price }}</span>
+            <span class="text-4xl font-bold text-emerald-600 dark:text-emerald-400">${{ product.price }}</span>
             <span class="text-gray-400 line-through text-lg">
               ${{ Math.round(product.price / (1 - product.discountPercentage / 100)) }}
             </span>
-            <span class="bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-400 text-sm font-bold px-2 py-1 rounded-full">
+            <span class="bg-emerald-100 dark:bg-indigo-900 text-emerald-600 dark:text-emerald-400 text-sm font-bold px-2 py-1 rounded-full">
               -{{ Math.round(product.discountPercentage) }}%
             </span>
           </div>
 
           <!-- Add to Cart Button -->
-          <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-xl transition-colors duration-200">
-            Add to Cart 🛒
-          </button>
+          <button 
+  @click="toggleCart"
+  class="w-full font-semibold py-3 px-6 rounded-xl transition-all duration-200 hover:shadow-lg hover:scale-[1.02]"
+  :class="cartStore.isInCart(product!.id) 
+    ? 'bg-red-500 hover:bg-red-600 text-white hover:shadow-red-200 dark:hover:shadow-red-900' 
+    : 'bg-emerald-600 hover:bg-teal-500 text-white hover:shadow-teal-200 dark:hover:shadow-teal-900'"
+>
+  {{ cartStore.isInCart(product!.id) ? 'Remove from Cart ✕' : 'Add to Cart 🛒' }}
+</button>
         </div>
       </div>
 
@@ -88,8 +94,8 @@
             :src="image"
             :alt="`${product.title} ${index + 1}`"
             @click="selectedImage = image"
-            class="w-20 h-20 object-cover rounded-xl cursor-pointer border-2 hover:border-indigo-500 transition-colors"
-            :class="selectedImage === image ? 'border-indigo-500' : 'border-transparent'"
+            class="w-20 h-20 object-cover rounded-xl cursor-pointer border-2 hover:border-emerald-500 transition-colors"
+            :class="selectedImage === image ? 'border-emerald-500' : 'border-transparent'"
           />
         </div>
       </div>
@@ -101,6 +107,19 @@
 import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import type { Product } from '../types/index'
+import { useCartStore } from '../composables/useCartStore'
+
+const cartStore = useCartStore()
+
+const toggleCart = () => {
+  if (product.value) {
+    if (cartStore.isInCart(product.value.id)) {
+      cartStore.removeFromCart(product.value.id)
+    } else {
+      cartStore.addToCart(product.value)
+    }
+  }
+}
 
 const route = useRoute()
 const router = useRouter()

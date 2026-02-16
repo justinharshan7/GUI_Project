@@ -5,10 +5,10 @@
         
         <!-- Logo -->
         <div class="flex items-center gap-2">
-          <div class="w-7 h-7 bg-indigo-600 rounded-lg flex items-center justify-center">
-            <span class="text-white font-bold text-xs">S</span>
-          </div>
-          <span class="text-lg font-bold text-indigo-600 dark:text-indigo-400">ShopVue</span>
+         <div class="w-7 h-7 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-lg flex items-center justify-center">
+  <span class="text-white font-bold text-xs tracking-tighter">GL</span>
+</div>
+<span class="text-lg font-bold bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent">Glitch</span>
         </div>
 
         <!-- Text -->

@@ -1,4 +1,4 @@
-# ShopVue 🛍️
+# Glitch 🛍️
 
 A modern E-Commerce Single Page Application built with Vue 3, TypeScript, and Tailwind CSS.
 

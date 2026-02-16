@@ -3,7 +3,7 @@
     <button
       v-if="showButton"
       @click="scrollToTop"
-      class="fixed bottom-8 right-8 z-50 w-12 h-12 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full shadow-lg hover:shadow-indigo-300 dark:hover:shadow-indigo-900 flex items-center justify-center transition-all duration-200 hover:scale-110"
+      class="fixed bottom-8 right-8 z-50 w-12 h-12 bg-emerald-600 hover:bg-teal-500 text-white rounded-full shadow-lg hover:shadow-emerald-300 dark:hover:shadow-emerald-900 flex items-center justify-center transition-all duration-200 hover:scale-110"
     >
       ↑
     </button>
