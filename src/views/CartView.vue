@@ -42,6 +42,7 @@
           <div class="flex-1">
             <p class="text-xs text-emerald-500 uppercase font-semibold">{{ item.product.category }}</p>
             <h3 class="text-gray-900 dark:text-white font-semibold text-sm mt-1">{{ item.product.title }}</h3>
+            <p v-if="item.size" class="text-xs text-emerald-500 mt-0.5">Size: {{ item.size }}</p>
             <p class="text-emerald-600 dark:text-emerald-400 font-bold mt-1">${{ item.product.price }}</p>
           </div>
 
