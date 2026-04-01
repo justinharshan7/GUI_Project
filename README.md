@@ -10,7 +10,7 @@ A modern E-Commerce Single Page Application built with Vue 3, TypeScript, and Ta
 - Vue Router 4
 
 ## Features
-- Browse 194 products across 24 categories
+- Browse 194 PRODUCTS across 24 CATEGORIES
 - Search products by name
 - Filter products by category
 - Sort by price (low/high) and rating
