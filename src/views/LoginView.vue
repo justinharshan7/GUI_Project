@@ -31,13 +31,23 @@
         <!-- Logo -->
         <div class="text-center mb-8">
           <div class="flex items-center justify-center gap-2 mb-3">
-            <div class="w-10 h-10 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl flex items-center justify-center shadow-lg">
-              <span class="text-white font-bold text-xl">⚡</span>
-            </div>
-            <span class="text-3xl font-bold">
-              <span class="text-white">Glitch</span>
-            </span>
-          </div>
+  <!-- Glitch Logo Box -->
+  <div class="relative w-10 h-10 flex-shrink-0">
+    <div class="absolute inset-0 bg-emerald-700 rounded-xl translate-x-0.5 translate-y-0.5 opacity-60"></div>
+    <div class="absolute inset-0 bg-emerald-900 rounded-xl -translate-x-0.5 -translate-y-0.5 opacity-40"></div>
+    <div class="relative w-10 h-10 bg-emerald-500 rounded-xl flex items-center justify-center shadow-md">
+      <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
+      </svg>
+    </div>
+  </div>
+  <!-- Glitch Text -->
+  <div class="relative">
+    <span class="absolute top-0 left-0 text-3xl font-black uppercase tracking-tighter text-emerald-700 opacity-60" style="transform: translate(1.5px, 1px);">Glitch</span>
+    <span class="absolute top-0 left-0 text-3xl font-black uppercase tracking-tighter text-emerald-900 opacity-40" style="transform: translate(-1.5px, -1px);">Glitch</span>
+    <span class="relative text-3xl font-black uppercase tracking-tighter text-white">Glitch</span>
+  </div>
+</div>
           <p class="text-white/70 text-sm">Sign in to your premium account</p>
         </div>
 
@@ -132,7 +142,8 @@ const handleLogin = async () => {
     loading.value = true
     error.value = ''
     await authStore.login(username.value, password.value)
-    router.push('/')
+await router.push('/')
+router.go(0)
   } catch (e) {
     error.value = 'Invalid username or password. Please try again.'
   } finally {
