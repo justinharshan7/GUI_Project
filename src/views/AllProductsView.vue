@@ -16,27 +16,27 @@
     </div>
 
     <!-- Filter & Sort Bar -->
-    <div class="bg-emerald-50/50 dark:bg-[#0a1f14] rounded-2xl border border-emerald-100 dark:border-emerald-900/40 p-4 mb-6">
+    <div class="bg-emerald-50/50 dark:bg-[#001718]/95 dark:backdrop-blur-md rounded-2xl border border-emerald-100 dark:border-white/10 p-4 mb-6">
       <div class="flex flex-col md:flex-row gap-4">
         <!-- Search -->
-        <div class="relative flex-1">
-          <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">🔍</span>
-          <input
-            v-model="searchQuery"
-            type="text"
-            placeholder="Search products..."
-            class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-emerald-900/50 bg-white dark:bg-[#021018] text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
-          />
-        </div>
+<div class="relative flex-1">
+  <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">🔍</span>
+  <input
+    v-model="searchQuery"
+    type="text"
+    placeholder="Search products..."
+    class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-emerald-900/50 bg-white dark:bg-[#1a1a1a] text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
+  />
+</div>
 
         <!-- Category -->
         <!-- Category Dropdown -->
 <div class="relative w-full md:w-52" ref="dropdownRef">
   <button
     @click="showDropdown = !showDropdown"
-    class="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-emerald-900/50 bg-white dark:bg-[#001718] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 flex items-center justify-between transition-all"
+    class="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-white/10 bg-white dark:bg-[#021018] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 flex items-center justify-between transition-all"
   >
-    <span class="text-sm">{{ selectedCategory ? formatCategory(selectedCategory) : 'All Categories' }}</span>
+    <span class="text-sm">{{ selectedCategory ? formatCategory(selectedCategory) : 'All CATEGORIES' }}</span>
     <span class="text-emerald-500 transition-transform duration-200" :class="showDropdown ? 'rotate-180' : ''">▾</span>
   </button>
 
@@ -45,19 +45,19 @@
     v-if="showDropdown"
     class="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-[#021018] border border-gray-200 dark:border-emerald-900/50 rounded-xl shadow-xl z-50 overflow-hidden"
   >
-    <!-- All Categories option -->
+    <!-- All CATEGORIES option -->
     <button
       @click="selectCategory('')"
       class="w-full text-left px-4 py-2.5 text-sm transition-colors"
-      :class="selectedCategory === '' ? 'bg-emerald-600 text-white' : 'text-gray-900 dark:text-white hover:bg-emerald-50 dark:hover:bg-emerald-900/30'"
+      :class="selectedCategory === '' ? 'bg-emerald-700 text-white' : 'text-gray-900 dark:text-white hover:bg-emerald-50 dark:hover:bg-emerald-900/30'"
     >
-      All Categories
+      All CATEGORIES
     </button>
 
     <!-- Scrollable list -->
     <div class="max-h-60 overflow-y-auto">
       <button
-        v-for="cat in categories"
+        v-for="cat in CATEGORIES"
         :key="cat.slug"
         @click="selectCategory(cat.slug)"
         class="w-full text-left px-4 py-2.5 text-sm transition-colors"
@@ -231,7 +231,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import type { Product, ProductsResponse, Category } from '../types/index'
 import { useFavouritesStore } from '../composables/useFavouritesStore'
@@ -239,11 +239,16 @@ import { useFavouritesStore } from '../composables/useFavouritesStore'
 const router = useRouter()
 const route = useRoute()
 const products = ref<Product[]>([])
-const categories = ref<Category[]>([])
+const CATEGORIES = ref<Category[]>([])
 const loading = ref(true)
-const searchQuery = ref('')
+const searchQuery = ref((route.query.search as string) || '')
 const selectedCategory = ref((route.query.category as string) || '')
-const sortBy = ref('')
+const sortBy = ref((route.query.sort as string) || '')
+watch(() => route.query, (newQuery) => {
+  if (newQuery.sort) sortBy.value = newQuery.sort as string
+  if (newQuery.category) selectedCategory.value = newQuery.category as string
+  if (newQuery.search) searchQuery.value = newQuery.search as string
+})
 const viewMode = ref<'grid' | 'list'>('grid')
 const showDropdown = ref(false)
 const dropdownRef = ref<HTMLElement | null>(null)
@@ -281,6 +286,7 @@ const filteredProducts = computed(() => {
   if (sortBy.value === 'price-asc') result = [...result].sort((a, b) => a.price - b.price)
   if (sortBy.value === 'price-desc') result = [...result].sort((a, b) => b.price - a.price)
   if (sortBy.value === 'rating') result = [...result].sort((a, b) => b.rating - a.rating)
+  if (sortBy.value === 'flash') result = [...result].sort((a, b) => b.discountPercentage - a.discountPercentage)
   return result
 })
 
@@ -297,13 +303,13 @@ const fetchProducts = async () => {
   }
 }
 
-const fetchCategories = async () => {
+const fetchCATEGORIES = async () => {
   try {
-    const response = await fetch('https://dummyjson.com/products/categories')
+    const response = await fetch('https://dummyjson.com/products/CATEGORIES')
     const data: Category[] = await response.json()
-    categories.value = data
+    CATEGORIES.value = data
   } catch (error) {
-    console.error('Error fetching categories:', error)
+    console.error('Error fetching CATEGORIES:', error)
   }
 }
 
@@ -314,7 +320,7 @@ const formatCategory = (slug: string) => slug.split('-').map(w => w.charAt(0).to
 
 onMounted(() => {
   fetchProducts()
-  fetchCategories()
+  fetchCATEGORIES()
   document.addEventListener('click', (e) => {
     if (dropdownRef.value && !dropdownRef.value.contains(e.target as Node)) {
       showDropdown.value = false

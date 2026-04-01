@@ -41,10 +41,17 @@
       </div>
 
       <!-- Price -->
-      <div class="flex items-center justify-between">
-        <span class="text-xl font-bold text-emerald-600 dark:text-emerald-400">${{ product.price }}</span>
-        <span class="text-xs text-gray-500 dark:text-gray-400">{{ product.stock }} left</span>
-      </div>
+      <!-- Price + Cart -->
+<div class="flex items-center justify-between">
+  <span class="text-xl font-bold text-emerald-600 dark:text-emerald-400">${{ product.price }}</span>
+  <button
+    @click.stop="toggleCart"
+    class="w-8 h-8 rounded-xl flex items-center justify-center transition-all duration-200 hover:scale-110"
+    :class="isInCart ? 'bg-red-500 text-white' : 'bg-emerald-600 hover:bg-emerald-500 text-white'"
+  >
+    <span class="text-sm">{{ isInCart ? '✕' : '🛒' }}</span>
+  </button>
+</div>
     </div>
   </div>
 </template>
@@ -53,6 +60,7 @@
 import { computed } from 'vue'
 import type { Product } from '../types/index'
 import { useFavouritesStore } from '../composables/useFavouritesStore'
+import { useCartStore } from '../composables/useCartStore'
 
 const props = defineProps<{
   product: Product
@@ -63,10 +71,20 @@ defineEmits<{
 }>()
 
 const favouritesStore = useFavouritesStore()
+const cartStore = useCartStore()
 
 const isFav = computed(() => favouritesStore.isFavourite(props.product.id))
+const isInCart = computed(() => cartStore.isInCart(props.product.id))
 
 const toggleFav = () => {
   favouritesStore.toggleFavourite(props.product)
+}
+
+const toggleCart = () => {
+  if (cartStore.isInCart(props.product.id)) {
+    cartStore.removeFromCart(props.product.id)
+  } else {
+    cartStore.addToCart(props.product)
+  }
 }
 </script>
