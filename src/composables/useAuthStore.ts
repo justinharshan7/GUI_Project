@@ -25,11 +25,14 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   const logout = () => {
-    token.value = null
-    user.value = null
-    localStorage.removeItem('token')
-    localStorage.removeItem('user')
-  }
+  token.value = null
+  user.value = null
+  localStorage.removeItem('token')
+  localStorage.removeItem('user')
+  localStorage.removeItem('cart')
+  localStorage.removeItem('favourites')
+  window.location.href = '/'
+}
 
   // Restore from localStorage on init
 if (localStorage.getItem('token')) {
