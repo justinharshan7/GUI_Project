@@ -7,11 +7,23 @@
         <!-- Brand Section -->
         <div>
           <div class="flex items-center gap-2 mb-4">
-            <div class="w-9 h-9 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl flex items-center justify-center shadow-md">
-              <span class="font-bold text-lg" style="filter: sepia(1) saturate(3) hue-rotate(180deg) brightness(1.5);">⚡</span>
-            </div>
-            <span class="text-xl font-bold bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent">Glitch</span>
-          </div>
+  <!-- Glitch Logo Box -->
+  <div class="relative w-9 h-9 flex-shrink-0">
+    <div class="absolute inset-0 bg-emerald-700 rounded-xl translate-x-0.5 translate-y-0.5 opacity-60"></div>
+    <div class="absolute inset-0 bg-emerald-900 rounded-xl -translate-x-0.5 -translate-y-0.5 opacity-40"></div>
+    <div class="relative w-9 h-9 bg-emerald-500 rounded-xl flex items-center justify-center shadow-md">
+      <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
+      </svg>
+    </div>
+  </div>
+  <!-- Glitch Text -->
+  <div class="relative">
+    <span class="absolute top-0 left-0 text-xl font-black uppercase tracking-tighter text-emerald-700 opacity-60" style="transform: translate(1.5px, 1px);">Glitch</span>
+    <span class="absolute top-0 left-0 text-xl font-black uppercase tracking-tighter text-emerald-900 opacity-40" style="transform: translate(-1.5px, -1px);">Glitch</span>
+    <span class="relative text-xl font-black uppercase tracking-tighter text-gray-900 dark:text-white">Glitch</span>
+  </div>
+</div>
           <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
             Next-gen shopping experience. Discover amazing products at unbeatable prices.
           </p>
