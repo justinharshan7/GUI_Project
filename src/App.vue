@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ 'dark': isDark }" class="min-h-screen bg-gray-50 dark:bg-[#021018] transition-colors duration-300">
+  <div :class="{ 'dark': isDark }" class="min-h-screen bg-emerald-50/60 dark:bg-[#021018] transition-colors duration-300">
     
     <!-- Show navbar only on non-auth pages -->
     <NavBar
