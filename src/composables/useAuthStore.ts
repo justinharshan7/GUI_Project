@@ -11,7 +11,7 @@ export const useAuthStore = defineStore('auth', () => {
     const response = await fetch('https://dummyjson.com/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password })
+      body: JSON.stringify({ username, password, expiresInMins: 60 })
     })
 
     if (!response.ok) throw new Error('Invalid credentials')
@@ -30,6 +30,12 @@ export const useAuthStore = defineStore('auth', () => {
     localStorage.removeItem('token')
     localStorage.removeItem('user')
   }
+
+  // Restore from localStorage on init
+if (localStorage.getItem('token')) {
+  token.value = localStorage.getItem('token')
+  user.value = JSON.parse(localStorage.getItem('user') || 'null')
+}
 
   return { token, user, isLoggedIn, login, logout }
 })
